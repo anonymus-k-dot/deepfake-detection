@@ -1,295 +1,264 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deepfake Detection Project Pipeline</title>
+    <title>Deepfake Detection Project Journal</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f8fafc;
+            background-color: #0f172a; /* slate-900 */
         }
-        .stage-badge {
-            @apply px-2 py-1 rounded text-xs font-semibold uppercase tracking-wider;
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .accent-glow {
+            box-shadow: 0 0 15px rgba(34, 211, 238, 0.2);
         }
     </style>
 </head>
-<body class="p-4 md:p-8">
-    <div class="max-w-7xl mx-auto">
-        <!-- Header -->
-        <header class="mb-10 text-center md:text-left">
-            <div class="flex items-center justify-center md:justify-start gap-3 mb-2">
-                <div class="bg-indigo-600 p-2 rounded-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.040L3 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622l-.382-3.016z" />
-                    </svg>
-                </div>
-                <h1 class="text-3xl font-bold text-slate-900">Deepfake Detection Project Pipeline</h1>
-            </div>
-            <p class="text-slate-500 max-w-2xl">A comprehensive guide for planning, implementing, and maintaining a robust deepfake detection system.</p>
-        </header>
+<body class="text-slate-300 min-h-screen pb-20">
 
-        <!-- Desktop Table View -->
-        <div class="hidden lg:block overflow-hidden bg-white shadow-xl shadow-slate-200/50 rounded-2xl border border-slate-200">
-            <table class="w-full text-left border-collapse">
-                <thead class="bg-slate-50 border-b border-slate-200">
-                    <tr>
-                        <th class="p-5 text-sm font-semibold text-slate-700 w-48">Stage</th>
-                        <th class="p-5 text-sm font-semibold text-slate-700 w-48">Goal</th>
-                        <th class="p-5 text-sm font-semibold text-slate-700">Key Activities</th>
-                        <th class="p-5 text-sm font-semibold text-slate-700">Deliverables</th>
-                        <th class="p-5 text-sm font-semibold text-slate-700">Best Practices</th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y divide-slate-100">
-                    <!-- Row 1 -->
-                    <tr class="hover:bg-slate-50 transition-colors">
-                        <td class="p-5 align-top">
-                            <span class="font-bold text-indigo-700">Requirement Gathering</span>
-                        </td>
-                        <td class="p-5 align-top text-slate-600 italic">Define problem and scope</td>
-                        <td class="p-5 align-top">
-                            <ul class="space-y-1.5 text-sm text-slate-600">
-                                <li class="flex items-start gap-2"><span class="text-indigo-500">•</span> Define objective (real vs fake classification)</li>
-                                <li class="flex items-start gap-2"><span class="text-indigo-500">•</span> Choose dataset (FaceForensics++)</li>
-                                <li class="flex items-start gap-2"><span class="text-indigo-500">•</span> Decide scope (video-only)</li>
-                            </ul>
-                        </td>
-                        <td class="p-5 align-top">
-                            <ul class="space-y-1.5 text-sm text-slate-600">
-                                <li class="flex items-center gap-2"><div class="w-1 h-1 bg-emerald-400 rounded-full"></div> Problem statement</li>
-                                <li class="flex items-center gap-2"><div class="w-1 h-1 bg-emerald-400 rounded-full"></div> Dataset selection</li>
-                                <li class="flex items-center gap-2"><div class="w-1 h-1 bg-emerald-400 rounded-full"></div> Evaluation metrics</li>
-                            </ul>
-                        </td>
-                        <td class="p-5 align-top">
-                            <div class="bg-blue-50 p-3 rounded-lg text-xs text-blue-800 border border-blue-100">
-                                • Start small dataset<br>• Avoid over-scoping
-                            </div>
-                        </td>
-                    </tr>
-
-                    <!-- Row 2 -->
-                    <tr class="hover:bg-slate-50 transition-colors">
-                        <td class="p-5 align-top">
-                            <span class="font-bold text-indigo-700">Design <span class="block text-xs text-slate-400 font-normal">(System Architecture)</span></span>
-                        </td>
-                        <td class="p-5 align-top text-slate-600 italic">Plan system workflow</td>
-                        <td class="p-5 align-top">
-                            <ul class="space-y-1.5 text-sm text-slate-600">
-                                <li class="flex items-start gap-2"><span class="text-indigo-500">•</span> Define pipeline (Video → Frames → Faces → CNN)</li>
-                                <li class="flex items-start gap-2"><span class="text-indigo-500">•</span> Select tools (OpenCV, PyTorch)</li>
-                                <li class="flex items-start gap-2"><span class="text-indigo-500">•</span> Design folder structure</li>
-                            </ul>
-                        </td>
-                        <td class="p-5 align-top">
-                            <ul class="space-y-1.5 text-sm text-slate-600">
-                                <li class="flex items-center gap-2"><div class="w-1 h-1 bg-emerald-400 rounded-full"></div> Pipeline diagram</li>
-                                <li class="flex items-center gap-2"><div class="w-1 h-1 bg-emerald-400 rounded-full"></div> Project structure</li>
-                            </ul>
-                        </td>
-                        <td class="p-5 align-top">
-                            <div class="bg-blue-50 p-3 rounded-lg text-xs text-blue-800 border border-blue-100">
-                                • Keep modules separate<br>• Plan for scalability
-                            </div>
-                        </td>
-                    </tr>
-
-                    <!-- Row 3 -->
-                    <tr class="hover:bg-slate-50 transition-colors">
-                        <td class="p-5 align-top">
-                            <span class="font-bold text-indigo-700">Implementation</span>
-                        </td>
-                        <td class="p-5 align-top text-slate-600 italic">Build system components</td>
-                        <td class="p-5 align-top">
-                            <ul class="space-y-1.5 text-sm text-slate-600">
-                                <li class="flex items-start gap-2"><span class="text-indigo-500">•</span> Data preprocessing (frame extraction, face detection)</li>
-                                <li class="flex items-start gap-2"><span class="text-indigo-500">•</span> Model building (CNN/ResNet)</li>
-                                <li class="flex items-start gap-2"><span class="text-indigo-500">•</span> Training setup</li>
-                            </ul>
-                        </td>
-                        <td class="p-5 align-top">
-                            <ul class="space-y-1.5 text-sm text-slate-600">
-                                <li class="flex items-center gap-2"><div class="w-1 h-1 bg-emerald-400 rounded-full"></div> Processed dataset</li>
-                                <li class="flex items-center gap-2"><div class="w-1 h-1 bg-emerald-400 rounded-full"></div> Training scripts</li>
-                                <li class="flex items-center gap-2"><div class="w-1 h-1 bg-emerald-400 rounded-full"></div> Saved model (.pth)</li>
-                            </ul>
-                        </td>
-                        <td class="p-5 align-top">
-                            <div class="bg-blue-50 p-3 rounded-lg text-xs text-blue-800 border border-blue-100">
-                                • Use small dataset first<br>• Use version control (Git)<br>• Track experiments
-                            </div>
-                        </td>
-                    </tr>
-
-                    <!-- Row 4 -->
-                    <tr class="hover:bg-slate-50 transition-colors">
-                        <td class="p-5 align-top">
-                            <span class="font-bold text-indigo-700">Testing & Evaluation</span>
-                        </td>
-                        <td class="p-5 align-top text-slate-600 italic">Measure performance</td>
-                        <td class="p-5 align-top">
-                            <ul class="space-y-1.5 text-sm text-slate-600">
-                                <li class="flex items-start gap-2"><span class="text-indigo-500">•</span> Split data (train/val/test)</li>
-                                <li class="flex items-start gap-2"><span class="text-indigo-500">•</span> Evaluate metrics (accuracy, precision, recall)</li>
-                                <li class="flex items-start gap-2"><span class="text-indigo-500">•</span> Test on unseen data</li>
-                            </ul>
-                        </td>
-                        <td class="p-5 align-top">
-                            <ul class="space-y-1.5 text-sm text-slate-600">
-                                <li class="flex items-center gap-2"><div class="w-1 h-1 bg-emerald-400 rounded-full"></div> Evaluation report</li>
-                                <li class="flex items-center gap-2"><div class="w-1 h-1 bg-emerald-400 rounded-full"></div> Confusion matrix</li>
-                            </ul>
-                        </td>
-                        <td class="p-5 align-top">
-                            <div class="bg-blue-50 p-3 rounded-lg text-xs text-blue-800 border border-blue-100">
-                                • Avoid overfitting<br>• Use validation set<br>• Test on diverse data
-                            </div>
-                        </td>
-                    </tr>
-
-                    <!-- Row 5 -->
-                    <tr class="hover:bg-slate-50 transition-colors">
-                        <td class="p-5 align-top">
-                            <span class="font-bold text-indigo-700">Deployment</span>
-                        </td>
-                        <td class="p-5 align-top text-slate-600 italic">Make model usable</td>
-                        <td class="p-5 align-top">
-                            <ul class="space-y-1.5 text-sm text-slate-600">
-                                <li class="flex items-start gap-2"><span class="text-indigo-500">•</span> Build UI (Streamlit/Flask)</li>
-                                <li class="flex items-start gap-2"><span class="text-indigo-500">•</span> Create prediction pipeline</li>
-                                <li class="flex items-start gap-2"><span class="text-indigo-500">•</span> Optimize inference</li>
-                            </ul>
-                        </td>
-                        <td class="p-5 align-top">
-                            <ul class="space-y-1.5 text-sm text-slate-600">
-                                <li class="flex items-center gap-2"><div class="w-1 h-1 bg-emerald-400 rounded-full"></div> Working demo app</li>
-                                <li class="flex items-center gap-2"><div class="w-1 h-1 bg-emerald-400 rounded-full"></div> Prediction script</li>
-                            </ul>
-                        </td>
-                        <td class="p-5 align-top">
-                            <div class="bg-blue-50 p-3 rounded-lg text-xs text-blue-800 border border-blue-100">
-                                • Keep UI simple<br>• Optimize speed
-                            </div>
-                        </td>
-                    </tr>
-
-                    <!-- Row 6 -->
-                    <tr class="hover:bg-slate-50 transition-colors">
-                        <td class="p-5 align-top">
-                            <span class="font-bold text-indigo-700">Maintenance & Improvement</span>
-                        </td>
-                        <td class="p-5 align-top text-slate-600 italic">Enhance system over time</td>
-                        <td class="p-5 align-top">
-                            <ul class="space-y-1.5 text-sm text-slate-600">
-                                <li class="flex items-start gap-2"><span class="text-indigo-500">•</span> Add more data</li>
-                                <li class="flex items-start gap-2"><span class="text-indigo-500">•</span> Improve model (ResNet, EfficientNet)</li>
-                                <li class="flex items-start gap-2"><span class="text-indigo-500">•</span> Add audio detection</li>
-                            </ul>
-                        </td>
-                        <td class="p-5 align-top">
-                            <ul class="space-y-1.5 text-sm text-slate-600">
-                                <li class="flex items-center gap-2"><div class="w-1 h-1 bg-emerald-400 rounded-full"></div> Updated models</li>
-                                <li class="flex items-center gap-2"><div class="w-1 h-1 bg-emerald-400 rounded-full"></div> Performance logs</li>
-                            </ul>
-                        </td>
-                        <td class="p-5 align-top">
-                            <div class="bg-blue-50 p-3 rounded-lg text-xs text-blue-800 border border-blue-100">
-                                • Iterate gradually<br>• Track improvements<br>• Refactor code
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Mobile View (Cards) -->
-        <div class="lg:hidden space-y-6" id="mobile-cards">
-            <!-- Template Card Scripted Content -->
-        </div>
+    <!-- Background Decor -->
+    <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-cyan-900/20 blur-[120px] rounded-full"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-indigo-900/20 blur-[120px] rounded-full"></div>
     </div>
 
-    <script>
-        // Data structure for the cards to keep the HTML clean
-        const stages = [
-            {
-                name: "Requirement Gathering",
-                goal: "Define problem and scope",
-                activities: ["Define objective (real vs fake classification)", "Choose dataset (FaceForensics++)", "Decide scope (video-only)"],
-                deliverables: ["Problem statement", "Dataset selection", "Evaluation metrics"],
-                bestPractices: ["Start small dataset", "Avoid over-scoping"]
-            },
-            {
-                name: "Design (System Architecture)",
-                goal: "Plan system workflow",
-                activities: ["Define pipeline (Video → Frames → Faces → CNN)", "Select tools (OpenCV, PyTorch)", "Design folder structure"],
-                deliverables: ["Pipeline diagram", "Project structure"],
-                bestPractices: ["Keep modules separate", "Plan for scalability"]
-            },
-            {
-                name: "Implementation",
-                goal: "Build system components",
-                activities: ["Data preprocessing (frame extraction, face detection)", "Model building (CNN/ResNet)", "Training setup"],
-                deliverables: ["Processed dataset", "Training scripts", "Saved model (.pth)"],
-                bestPractices: ["Use small dataset first", "Use version control (Git)", "Track experiments"]
-            },
-            {
-                name: "Testing & Evaluation",
-                goal: "Measure performance",
-                activities: ["Split data (train/val/test)", "Evaluate metrics (accuracy, precision, recall)", "Test on unseen data"],
-                deliverables: ["Evaluation report", "Confusion matrix"],
-                bestPractices: ["Avoid overfitting", "Use validation set", "Test on diverse data"]
-            },
-            {
-                name: "Deployment",
-                goal: "Make model usable",
-                activities: ["Build UI (Streamlit/Flask)", "Create prediction pipeline", "Optimize inference"],
-                deliverables: ["Working demo app", "Prediction script"],
-                bestPractices: ["Keep UI simple", "Optimize speed"]
-            },
-            {
-                name: "Maintenance & Improvement",
-                goal: "Enhance system over time",
-                activities: ["Add more data", "Improve model (ResNet, EfficientNet)", "Add audio detection"],
-                deliverables: ["Updated models", "Performance logs"],
-                bestPractices: ["Iterate gradually", "Track improvements", "Refactor code"]
-            }
-        ];
+    <div class="max-w-5xl mx-auto px-6 pt-12">
+        <!-- Header -->
+        <header class="mb-12 border-l-4 border-cyan-500 pl-6 py-2">
+            <h1 class="text-4xl font-extrabold text-white tracking-tight mb-2 uppercase mono">
+                Deepfake Detection <span class="text-cyan-400">Project Journal</span>
+            </h1>
+            <p class="text-slate-400 text-lg font-light">A simplified table of actions, milestones, and implementation logs.</p>
+        </header>
 
-        const mobileContainer = document.getElementById('mobile-cards');
-        stages.forEach(s => {
-            const card = document.createElement('div');
-            card.className = "bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4";
-            card.innerHTML = `
-                <div class="border-b border-slate-100 pb-3">
-                    <h3 class="text-xl font-bold text-indigo-700">${s.name}</h3>
-                    <p class="text-slate-500 italic text-sm">${s.goal}</p>
-                </div>
-                <div>
-                    <h4 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Key Activities</h4>
-                    <ul class="space-y-2 text-slate-600 text-sm">
-                        ${s.activities.map(a => `<li class="flex items-start gap-2"><span class="text-indigo-400">•</span> ${a}</li>`).join('')}
-                    </ul>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                    <div>
-                        <h4 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Deliverables</h4>
-                        <ul class="space-y-1 text-slate-600 text-sm">
-                            ${s.deliverables.map(d => `<li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-emerald-400 rounded-full"></div> ${d}</li>`).join('')}
-                        </ul>
+        <!-- Journal Content -->
+        <div class="space-y-4">
+            <!-- Stage 1 -->
+            <div class="glass-panel rounded-xl p-6 hover:border-cyan-500/30 transition-all duration-300">
+                <div class="flex flex-col md:flex-row md:items-start gap-4">
+                    <div class="flex-none">
+                        <span class="mono bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded-md text-sm border border-cyan-500/20">01</span>
                     </div>
-                    <div>
-                        <h4 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Best Practices</h4>
-                        <div class="bg-blue-50 p-3 rounded-lg text-xs text-blue-800 border border-blue-100">
-                             ${s.bestPractices.join('<br>• ')}
+                    <div class="flex-grow">
+                        <h2 class="text-xl font-bold text-white mb-1">Dataset Acquisition</h2>
+                        <p class="text-cyan-400/80 text-sm italic mb-4">Selected and downloaded dataset from Kaggle</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <ul class="space-y-2">
+                                <li class="flex items-center gap-3 text-sm">
+                                    <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    Chose FaceForensics++ subset
+                                </li>
+                                <li class="flex items-center gap-3 text-sm">
+                                    <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    Downloaded dataset
+                                </li>
+                            </ul>
+                            <ul class="space-y-2">
+                                <li class="flex items-center gap-3 text-sm">
+                                    <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    Explored folder structure
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-            `;
-            mobileContainer.appendChild(card);
-        });
-    </script>
+            </div>
+
+            <!-- Stage 2 -->
+            <div class="glass-panel rounded-xl p-6 hover:border-cyan-500/30 transition-all duration-300">
+                <div class="flex flex-col md:flex-row md:items-start gap-4">
+                    <div class="flex-none">
+                        <span class="mono bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded-md text-sm border border-cyan-500/20">02</span>
+                    </div>
+                    <div class="flex-grow">
+                        <h2 class="text-xl font-bold text-white mb-1">Dataset Selection & Organization</h2>
+                        <p class="text-cyan-400/80 text-sm italic mb-4">Selected small subset and organized data</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <ul class="space-y-2">
+                                <li class="flex items-center gap-3 text-sm">
+                                    <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    Picked 20-30 real videos
+                                </li>
+                                <li class="flex items-center gap-3 text-sm">
+                                    <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    Picked 20-30 fake videos
+                                </li>
+                            </ul>
+                            <ul class="space-y-2">
+                                <li class="flex items-center gap-3 text-sm">
+                                    <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    Created <code class="bg-slate-800 px-1 text-pink-400 rounded">real/</code> and <code class="bg-slate-800 px-1 text-pink-400 rounded">fake/</code> folders
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stage 3 -->
+            <div class="glass-panel rounded-xl p-6 hover:border-cyan-500/30 transition-all duration-300">
+                <div class="flex flex-col md:flex-row md:items-start gap-4">
+                    <div class="flex-none">
+                        <span class="mono bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded-md text-sm border border-cyan-500/20">03</span>
+                    </div>
+                    <div class="flex-grow">
+                        <h2 class="text-xl font-bold text-white mb-1">Environment Setup</h2>
+                        <p class="text-cyan-400/80 text-sm italic mb-4">Set up development environment</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <ul class="space-y-2">
+                                <li class="flex items-center gap-3 text-sm text-slate-400">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Configured Google Colab or local setup
+                                </li>
+                                <li class="flex items-center gap-3 text-sm text-slate-400">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Installed libraries (OpenCV, PyTorch, etc.)
+                                </li>
+                                <li class="flex items-center gap-3 text-sm text-slate-400">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-cyan-500"></span> Enabled GPU
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stage 4 -->
+            <div class="glass-panel rounded-xl p-6 hover:border-cyan-500/30 transition-all duration-300 border-l-2 border-l-indigo-500">
+                <div class="flex flex-col md:flex-row md:items-start gap-4">
+                    <div class="flex-none">
+                        <span class="mono bg-indigo-500/10 text-indigo-400 px-3 py-1 rounded-md text-sm border border-indigo-500/20">04</span>
+                    </div>
+                    <div class="flex-grow">
+                        <h2 class="text-xl font-bold text-white mb-1">Data Preprocessing</h2>
+                        <p class="text-indigo-400/80 text-sm italic mb-4">Converted videos into model-ready data</p>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                            <div class="bg-slate-800/50 p-3 rounded-lg border border-slate-700">
+                                <div class="text-[10px] text-slate-500 uppercase font-bold mb-1">Tool</div>
+                                <div class="text-sm font-semibold">OpenCV</div>
+                            </div>
+                            <div class="bg-slate-800/50 p-3 rounded-lg border border-slate-700">
+                                <div class="text-[10px] text-slate-500 uppercase font-bold mb-1">Method</div>
+                                <div class="text-sm font-semibold">Frame Skip</div>
+                            </div>
+                            <div class="bg-slate-800/50 p-3 rounded-lg border border-slate-700">
+                                <div class="text-[10px] text-slate-500 uppercase font-bold mb-1">Focus</div>
+                                <div class="text-sm font-semibold">Face Detection</div>
+                            </div>
+                            <div class="bg-slate-800/50 p-3 rounded-lg border border-slate-700">
+                                <div class="text-[10px] text-slate-500 uppercase font-bold mb-1">Resolution</div>
+                                <div class="text-sm font-semibold italic">224 x 224</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stage 5 -->
+            <div class="glass-panel rounded-xl p-6 hover:border-cyan-500/30 transition-all duration-300">
+                <div class="flex flex-col md:flex-row md:items-start gap-4">
+                    <div class="flex-none">
+                        <span class="mono bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded-md text-sm border border-cyan-500/20">05</span>
+                    </div>
+                    <div class="flex-grow">
+                        <h2 class="text-xl font-bold text-white mb-1">Model Development</h2>
+                        <p class="text-cyan-400/80 text-sm italic mb-4">Built CNN model</p>
+                        <div class="flex flex-wrap gap-2 mt-2">
+                            <span class="bg-slate-800 text-xs px-2 py-1 rounded border border-slate-700">Architecture: CNN</span>
+                            <span class="bg-slate-800 text-xs px-2 py-1 rounded border border-slate-700">Loss: Binary Cross Entropy</span>
+                            <span class="bg-slate-800 text-xs px-2 py-1 rounded border border-slate-700">Optimizer: Adam</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stage 6 & 7 (Combined for layout) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="glass-panel rounded-xl p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="mono text-xs text-cyan-500">06</span>
+                        <h2 class="font-bold text-white uppercase tracking-wider text-sm">Model Training</h2>
+                    </div>
+                    <ul class="text-sm space-y-2 text-slate-400">
+                        <li>• Split data (train/validation)</li>
+                        <li>• Trained over epochs</li>
+                        <li>• Monitored loss and accuracy</li>
+                    </ul>
+                </div>
+                <div class="glass-panel rounded-xl p-6 border-cyan-500/20">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="mono text-xs text-cyan-500">07</span>
+                        <h2 class="font-bold text-white uppercase tracking-wider text-sm">Model Evaluation</h2>
+                    </div>
+                    <ul class="text-sm space-y-2 text-slate-400">
+                        <li>• Tested on unseen data</li>
+                        <li>• Calculated Accuracy, Precision, Recall</li>
+                        <li>• Generated confusion matrix</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Stage 8 -->
+            <div class="glass-panel rounded-xl p-6 hover:border-cyan-500/30 transition-all duration-300">
+                <div class="flex flex-col md:flex-row md:items-start gap-4">
+                    <div class="flex-none">
+                        <span class="mono bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded-md text-sm border border-cyan-500/20">08</span>
+                    </div>
+                    <div class="flex-grow">
+                        <h2 class="text-xl font-bold text-white mb-1">Prediction Pipeline</h2>
+                        <p class="text-cyan-400/80 text-sm italic mb-4">Built inference system</p>
+                        <div class="flex items-center text-xs text-slate-500 mono gap-2 mt-2">
+                            Video Input <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg> 
+                            Extraction <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                            Prediction <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                            Aggregate
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stage 9 & 10 -->
+            <div class="glass-panel rounded-xl p-6 hover:border-cyan-500/30 transition-all duration-300 bg-cyan-500/[0.02]">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="mono text-xs text-slate-500">09</span>
+                            <h2 class="font-bold text-white">Deployment <span class="text-xs text-slate-500 font-normal ml-2">(Optional)</span></h2>
+                        </div>
+                        <ul class="text-sm space-y-1 text-slate-400">
+                            <li>• Built UI using Streamlit/Flask</li>
+                            <li>• Enabled video upload and prediction</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="mono text-xs text-slate-500">10</span>
+                            <h2 class="font-bold text-white">Maintenance & Improvement</h2>
+                        </div>
+                        <ul class="text-sm space-y-1 text-slate-400">
+                            <li>• Added more data</li>
+                            <li>• Tried advanced models (ResNet)</li>
+                            <li>• Optimized pipeline</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-16 text-center text-slate-600 text-xs mono">
+            &copy; 2024 DEEPFAKE DETECTION LAB // LOG_LEVEL: INFO
+        </footer>
+    </div>
+
 </body>
 </html>
