@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deepfake Detection Project Pipeline</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        .stage-badge {
+            @apply px-2 py-1 rounded text-xs font-semibold uppercase tracking-wider;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+    <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <header class="mb-10 text-center md:text-left">
+            <div class="flex items-center justify-center md:justify-start gap-3 mb-2">
+                <div class="bg-indigo-600 p-2 rounded-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.040L3 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622l-.382-3.016z" />
+                    </svg>
+                </div>
+                <h1 class="text-3xl font-bold text-slate-900">Deepfake Detection Project Pipeline</h1>
+            </div>
+            <p class="text-slate-500 max-w-2xl">A comprehensive guide for planning, implementing, and maintaining a robust deepfake detection system.</p>
+        </header>
+
+        <!-- Desktop Table View -->
+        <div class="hidden lg:block overflow-hidden bg-white shadow-xl shadow-slate-200/50 rounded-2xl border border-slate-200">
+            <table class="w-full text-left border-collapse">
+                <thead class="bg-slate-50 border-b border-slate-200">
+                    <tr>
+                        <th class="p-5 text-sm font-semibold text-slate-700 w-48">Stage</th>
+                        <th class="p-5 text-sm font-semibold text-slate-700 w-48">Goal</th>
+                        <th class="p-5 text-sm font-semibold text-slate-700">Key Activities</th>
+                        <th class="p-5 text-sm font-semibold text-slate-700">Deliverables</th>
+                        <th class="p-5 text-sm font-semibold text-slate-700">Best Practices</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                    <!-- Row 1 -->
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="p-5 align-top">
+                            <span class="font-bold text-indigo-700">Requirement Gathering</span>
+                        </td>
+                        <td class="p-5 align-top text-slate-600 italic">Define problem and scope</td>
+                        <td class="p-5 align-top">
+                            <ul class="space-y-1.5 text-sm text-slate-600">
+                                <li class="flex items-start gap-2"><span class="text-indigo-500">•</span> Define objective (real vs fake classification)</li>
+                                <li class="flex items-start gap-2"><span class="text-indigo-500">•</span> Choose dataset (FaceForensics++)</li>
+                                <li class="flex items-start gap-2"><span class="text-indigo-500">•</span> Decide scope (video-only)</li>
+                            </ul>
+                        </td>
+                        <td class="p-5 align-top">
+                            <ul class="space-y-1.5 text-sm text-slate-600">
+                                <li class="flex items-center gap-2"><div class="w-1 h-1 bg-emerald-400 rounded-full"></div> Problem statement</li>
+                                <li class="flex items-center gap-2"><div class="w-1 h-1 bg-emerald-400 rounded-full"></div> Dataset selection</li>
+                                <li class="flex items-center gap-2"><div class="w-1 h-1 bg-emerald-400 rounded-full"></div> Evaluation metrics</li>
+                            </ul>
+                        </td>
+                        <td class="p-5 align-top">
+                            <div class="bg-blue-50 p-3 rounded-lg text-xs text-blue-800 border border-blue-100">
+                                • Start small dataset<br>• Avoid over-scoping
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- Row 2 -->
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="p-5 align-top">
+                            <span class="font-bold text-indigo-700">Design <span class="block text-xs text-slate-400 font-normal">(System Architecture)</span></span>
+                        </td>
+                        <td class="p-5 align-top text-slate-600 italic">Plan system workflow</td>
+                        <td class="p-5 align-top">
+                            <ul class="space-y-1.5 text-sm text-slate-600">
+                                <li class="flex items-start gap-2"><span class="text-indigo-500">•</span> Define pipeline (Video → Frames → Faces → CNN)</li>
+                                <li class="flex items-start gap-2"><span class="text-indigo-500">•</span> Select tools (OpenCV, PyTorch)</li>
+                                <li class="flex items-start gap-2"><span class="text-indigo-500">•</span> Design folder structure</li>
+                            </ul>
+                        </td>
+                        <td class="p-5 align-top">
+                            <ul class="space-y-1.5 text-sm text-slate-600">
+                                <li class="flex items-center gap-2"><div class="w-1 h-1 bg-emerald-400 rounded-full"></div> Pipeline diagram</li>
+                                <li class="flex items-center gap-2"><div class="w-1 h-1 bg-emerald-400 rounded-full"></div> Project structure</li>
+                            </ul>
+                        </td>
+                        <td class="p-5 align-top">
+                            <div class="bg-blue-50 p-3 rounded-lg text-xs text-blue-800 border border-blue-100">
+                                • Keep modules separate<br>• Plan for scalability
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- Row 3 -->
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="p-5 align-top">
+                            <span class="font-bold text-indigo-700">Implementation</span>
+                        </td>
+                        <td class="p-5 align-top text-slate-600 italic">Build system components</td>
+                        <td class="p-5 align-top">
+                            <ul class="space-y-1.5 text-sm text-slate-600">
+                                <li class="flex items-start gap-2"><span class="text-indigo-500">•</span> Data preprocessing (frame extraction, face detection)</li>
+                                <li class="flex items-start gap-2"><span class="text-indigo-500">•</span> Model building (CNN/ResNet)</li>
+                                <li class="flex items-start gap-2"><span class="text-indigo-500">•</span> Training setup</li>
+                            </ul>
+                        </td>
+                        <td class="p-5 align-top">
+                            <ul class="space-y-1.5 text-sm text-slate-600">
+                                <li class="flex items-center gap-2"><div class="w-1 h-1 bg-emerald-400 rounded-full"></div> Processed dataset</li>
+                                <li class="flex items-center gap-2"><div class="w-1 h-1 bg-emerald-400 rounded-full"></div> Training scripts</li>
+                                <li class="flex items-center gap-2"><div class="w-1 h-1 bg-emerald-400 rounded-full"></div> Saved model (.pth)</li>
+                            </ul>
+                        </td>
+                        <td class="p-5 align-top">
+                            <div class="bg-blue-50 p-3 rounded-lg text-xs text-blue-800 border border-blue-100">
+                                • Use small dataset first<br>• Use version control (Git)<br>• Track experiments
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- Row 4 -->
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="p-5 align-top">
+                            <span class="font-bold text-indigo-700">Testing & Evaluation</span>
+                        </td>
+                        <td class="p-5 align-top text-slate-600 italic">Measure performance</td>
+                        <td class="p-5 align-top">
+                            <ul class="space-y-1.5 text-sm text-slate-600">
+                                <li class="flex items-start gap-2"><span class="text-indigo-500">•</span> Split data (train/val/test)</li>
+                                <li class="flex items-start gap-2"><span class="text-indigo-500">•</span> Evaluate metrics (accuracy, precision, recall)</li>
+                                <li class="flex items-start gap-2"><span class="text-indigo-500">•</span> Test on unseen data</li>
+                            </ul>
+                        </td>
+                        <td class="p-5 align-top">
+                            <ul class="space-y-1.5 text-sm text-slate-600">
+                                <li class="flex items-center gap-2"><div class="w-1 h-1 bg-emerald-400 rounded-full"></div> Evaluation report</li>
+                                <li class="flex items-center gap-2"><div class="w-1 h-1 bg-emerald-400 rounded-full"></div> Confusion matrix</li>
+                            </ul>
+                        </td>
+                        <td class="p-5 align-top">
+                            <div class="bg-blue-50 p-3 rounded-lg text-xs text-blue-800 border border-blue-100">
+                                • Avoid overfitting<br>• Use validation set<br>• Test on diverse data
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- Row 5 -->
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="p-5 align-top">
+                            <span class="font-bold text-indigo-700">Deployment</span>
+                        </td>
+                        <td class="p-5 align-top text-slate-600 italic">Make model usable</td>
+                        <td class="p-5 align-top">
+                            <ul class="space-y-1.5 text-sm text-slate-600">
+                                <li class="flex items-start gap-2"><span class="text-indigo-500">•</span> Build UI (Streamlit/Flask)</li>
+                                <li class="flex items-start gap-2"><span class="text-indigo-500">•</span> Create prediction pipeline</li>
+                                <li class="flex items-start gap-2"><span class="text-indigo-500">•</span> Optimize inference</li>
+                            </ul>
+                        </td>
+                        <td class="p-5 align-top">
+                            <ul class="space-y-1.5 text-sm text-slate-600">
+                                <li class="flex items-center gap-2"><div class="w-1 h-1 bg-emerald-400 rounded-full"></div> Working demo app</li>
+                                <li class="flex items-center gap-2"><div class="w-1 h-1 bg-emerald-400 rounded-full"></div> Prediction script</li>
+                            </ul>
+                        </td>
+                        <td class="p-5 align-top">
+                            <div class="bg-blue-50 p-3 rounded-lg text-xs text-blue-800 border border-blue-100">
+                                • Keep UI simple<br>• Optimize speed
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- Row 6 -->
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="p-5 align-top">
+                            <span class="font-bold text-indigo-700">Maintenance & Improvement</span>
+                        </td>
+                        <td class="p-5 align-top text-slate-600 italic">Enhance system over time</td>
+                        <td class="p-5 align-top">
+                            <ul class="space-y-1.5 text-sm text-slate-600">
+                                <li class="flex items-start gap-2"><span class="text-indigo-500">•</span> Add more data</li>
+                                <li class="flex items-start gap-2"><span class="text-indigo-500">•</span> Improve model (ResNet, EfficientNet)</li>
+                                <li class="flex items-start gap-2"><span class="text-indigo-500">•</span> Add audio detection</li>
+                            </ul>
+                        </td>
+                        <td class="p-5 align-top">
+                            <ul class="space-y-1.5 text-sm text-slate-600">
+                                <li class="flex items-center gap-2"><div class="w-1 h-1 bg-emerald-400 rounded-full"></div> Updated models</li>
+                                <li class="flex items-center gap-2"><div class="w-1 h-1 bg-emerald-400 rounded-full"></div> Performance logs</li>
+                            </ul>
+                        </td>
+                        <td class="p-5 align-top">
+                            <div class="bg-blue-50 p-3 rounded-lg text-xs text-blue-800 border border-blue-100">
+                                • Iterate gradually<br>• Track improvements<br>• Refactor code
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Mobile View (Cards) -->
+        <div class="lg:hidden space-y-6" id="mobile-cards">
+            <!-- Template Card Scripted Content -->
+        </div>
+    </div>
+
+    <script>
+        // Data structure for the cards to keep the HTML clean
+        const stages = [
+            {
+                name: "Requirement Gathering",
+                goal: "Define problem and scope",
+                activities: ["Define objective (real vs fake classification)", "Choose dataset (FaceForensics++)", "Decide scope (video-only)"],
+                deliverables: ["Problem statement", "Dataset selection", "Evaluation metrics"],
+                bestPractices: ["Start small dataset", "Avoid over-scoping"]
+            },
+            {
+                name: "Design (System Architecture)",
+                goal: "Plan system workflow",
+                activities: ["Define pipeline (Video → Frames → Faces → CNN)", "Select tools (OpenCV, PyTorch)", "Design folder structure"],
+                deliverables: ["Pipeline diagram", "Project structure"],
+                bestPractices: ["Keep modules separate", "Plan for scalability"]
+            },
+            {
+                name: "Implementation",
+                goal: "Build system components",
+                activities: ["Data preprocessing (frame extraction, face detection)", "Model building (CNN/ResNet)", "Training setup"],
+                deliverables: ["Processed dataset", "Training scripts", "Saved model (.pth)"],
+                bestPractices: ["Use small dataset first", "Use version control (Git)", "Track experiments"]
+            },
+            {
+                name: "Testing & Evaluation",
+                goal: "Measure performance",
+                activities: ["Split data (train/val/test)", "Evaluate metrics (accuracy, precision, recall)", "Test on unseen data"],
+                deliverables: ["Evaluation report", "Confusion matrix"],
+                bestPractices: ["Avoid overfitting", "Use validation set", "Test on diverse data"]
+            },
+            {
+                name: "Deployment",
+                goal: "Make model usable",
+                activities: ["Build UI (Streamlit/Flask)", "Create prediction pipeline", "Optimize inference"],
+                deliverables: ["Working demo app", "Prediction script"],
+                bestPractices: ["Keep UI simple", "Optimize speed"]
+            },
+            {
+                name: "Maintenance & Improvement",
+                goal: "Enhance system over time",
+                activities: ["Add more data", "Improve model (ResNet, EfficientNet)", "Add audio detection"],
+                deliverables: ["Updated models", "Performance logs"],
+                bestPractices: ["Iterate gradually", "Track improvements", "Refactor code"]
+            }
+        ];
+
+        const mobileContainer = document.getElementById('mobile-cards');
+        stages.forEach(s => {
+            const card = document.createElement('div');
+            card.className = "bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4";
+            card.innerHTML = `
+                <div class="border-b border-slate-100 pb-3">
+                    <h3 class="text-xl font-bold text-indigo-700">${s.name}</h3>
+                    <p class="text-slate-500 italic text-sm">${s.goal}</p>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Key Activities</h4>
+                    <ul class="space-y-2 text-slate-600 text-sm">
+                        ${s.activities.map(a => `<li class="flex items-start gap-2"><span class="text-indigo-400">•</span> ${a}</li>`).join('')}
+                    </ul>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                    <div>
+                        <h4 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Deliverables</h4>
+                        <ul class="space-y-1 text-slate-600 text-sm">
+                            ${s.deliverables.map(d => `<li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-emerald-400 rounded-full"></div> ${d}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Best Practices</h4>
+                        <div class="bg-blue-50 p-3 rounded-lg text-xs text-blue-800 border border-blue-100">
+                             ${s.bestPractices.join('<br>• ')}
+                        </div>
+                    </div>
+                </div>
+            `;
+            mobileContainer.appendChild(card);
+        });
+    </script>
+</body>
+</html>
