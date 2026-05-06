@@ -1,18 +1,4 @@
-"""
-preprocess.py
-Veritas — Inference Preprocessing Pipeline
 
-Mirrors the Colab training preprocessing (preprocessing.py) exactly so that
-the model receives the same input distribution it was trained on.
-
-Pipeline per video:
-    1. Extract frames at TARGET_FPS via OpenCV
-    2. Detect face + 5-point landmarks with MTCNN (confidence ≥ 0.95)
-    3. Crop full face (224×224), eye region (96×96), nose region (64×64)
-    4. Compute sliding-window temporal difference tensors (same axis=-1 logic)
-    5. Apply ImageNet normalisation to spatial crops
-    6. Return (full_face_t, eye_crop_t, nose_crop_t, temporal_t) CPU tensors
-"""
 
 import logging
 import cv2

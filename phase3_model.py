@@ -1,20 +1,6 @@
-"""
-phase3_model.py
-Multi-Stream Deepfake Detection — Model Architecture (Phase 3)
-
-Four independent neural streams analyse different facial regions:
-    1. EyeStream        — texture & blinking artifacts    (96×96  eye crops)
-    2. NoseStream       — structural distortion           (64×64  nose crops)
-    3. FullFaceHybrid   — global symmetry / ViT hybrid   (224×224 full face)
-    4. TemporalStream   — inter-frame motion jitter       (6-ch diff tensor)
-
-All stream features are concatenated (1280-d) and passed through a fusion
-FC head that produces a single binary logit.
-Label convention: Real = 0, Fake = 1.
-"""
 
 import os
-import h5py
+# import h5py
 import numpy as np
 
 import torch

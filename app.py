@@ -1,30 +1,3 @@
-"""
-app.py
-Veritas — Deepfake Detection Backend
-
-Flask API server. Exposes:
-    POST /api/analyze   — accepts a video file, returns verdict JSON
-    GET  /health        — liveness check
-
-Expected request (multipart/form-data):
-    field "video": MP4 / MOV / WEBM file
-
-Response JSON:
-    {
-        "verdict":    "FAKE" | "REAL",
-        "confidence": float,   # 0–100, probability of the verdict
-        "windows":    int,     # temporal windows analysed
-        "streams": {
-            "eye":      float, # stream contribution % (sum ~100)
-            "nose":     float,
-            "face":     float,
-            "temporal": float
-        }
-    }
-
-Run:
-    python app.py
-"""
 
 import os
 import logging
@@ -50,12 +23,8 @@ logging.basicConfig(
 )
 log = logging.getLogger("veritas")
 
-# =============================================================================
-# CONFIGURATION
-# =============================================================================
-
 MODEL_PATH      = Path("models/best_model.pt")
-INFERENCE_BATCH = 32                          # windows per GPU/CPU batch
+INFERENCE_BATCH = 32                          
 MAX_UPLOAD_MB   = 500
 ALLOWED_EXT     = {".mp4", ".mov", ".webm"}
 
@@ -63,9 +32,6 @@ ALLOWED_EXT     = {".mp4", ".mov", ".webm"}
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 log.info(f"Inference device: {DEVICE}")
 
-# =============================================================================
-# MODEL LOADING
-# =============================================================================
 
 def _load_model(path: Path, device: str) -> DeepfakeMultiStreamModel:
     """
@@ -111,9 +77,6 @@ except FileNotFoundError as e:
     model        = None
     preprocessor = None
 
-# =============================================================================
-# FLASK APP
-# =============================================================================
 
 app = Flask(__name__)
 CORS(app)
@@ -242,7 +205,7 @@ def analyze():
             "error": f"Unsupported format '{ext}'. Accepted: MP4, MOV, WEBM."
         }), 415
 
-    # ── Save upload to temp file ───────────────────────────────────────────────
+    # Save upload to temp file ───────────────────────────────────────────────
     tmp_path = None
     try:
         with tempfile.NamedTemporaryFile(suffix=ext, delete=False) as tmp:
@@ -278,7 +241,6 @@ def analyze():
             "streams":    stream_pcts,
         })
 
-    # ── Error handling ─────────────────────────────────────────────────────────
     except ValueError as e:
         # Raised by preprocessor for short/dark/faceless videos
         log.warning(f"Preprocessing rejected '{f.filename}': {e}")
@@ -300,9 +262,7 @@ def analyze():
             os.unlink(tmp_path)
 
 
-# =============================================================================
-# ENTRY POINT
-# =============================================================================
+
 
 if __name__ == "__main__":
     import argparse
