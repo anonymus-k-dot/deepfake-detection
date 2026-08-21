@@ -6,51 +6,67 @@ VERITAS is an end-to-end deepfake detection system designed to identify facial m
 
 ## 1. High-Level Pipeline Flow
 
-```text
-               Input Video (.mp4 / .mov / .webm)
-                             │
-                             ▼
-                 [OpenCV Frame Extraction]
-                    (Downsampled to 10 FPS)
-                             │
-                             ▼
-                 [MTCNN Face & Landmark Detection]
-                 (Bounding Box + 5 Facial Landmarks)
-                             │
-          ┌──────────────────┼──────────────────┬──────────────────┐
-          │                  │                  │                  │
-          ▼                  ▼                  ▼                  ▼
-    [Eye Crop]          [Nose Crop]       [Full Face]       [Temporal Window]
-      96×96               64×64             224×224             (N-2)×6×112×112
-  ImageNet Norm       ImageNet Norm      ImageNet Norm        Frame Differences
-          │                  │                  │                  │
-          ▼                  ▼                  ▼                  ▼
-   [Stream 1: Eye]    [Stream 2: Nose]  [Stream 3: Face]  [Stream 4: Motion]
-   Laplacian Filter     4 Conv Blocks       ResNet-18        3 Conv Blocks
-    Mod-ResNet-18         CBAM Block       Transformer          SE Block
-       SE Block             (256-d)          (512-d)             (256-d)
-       (256-d)               │                  │                  │
-          │                  │                  │                  │
-          └──────────────────┼──────────────────┴──────────────────┘
-                             │
-                             ▼
-                  [Feature Concatenation]
-                  (1280-d Fused Vector)
-                             │
-                             ▼
-                      [Fusion Head]
-               Linear(1280 → 512) → BN → ReLU
-                    Dropout(0.4)
-                 Linear(512 → 1 logit)
-                             │
-                             ▼
-                   [Sigmoid Activation]
-                    P(fake) ∈ [0, 1]
-                             │
-                             ▼
-                 [Window Aggregation & Verdict]
-            Mean Probability across all N windows
-          Contribution attribution per neural stream
+```mermaid
+flowchart TD
+    subgraph Client["Client / Upload Interface (templates/index.html)"]
+        A["Input Video<br/><code>.mp4 / .mov / .webm</code>"]
+        WebUI["Interactive Web UI & REST API<br/><code>POST /api/analyze</code>"]
+    end
+
+    subgraph Preprocessing["Preprocessing Pipeline (preprocess.py)"]
+        B["OpenCV Frame Extraction<br/><b>10 FPS Sampling</b>"]
+        C["MTCNN Face & Landmark Detection<br/><b>Conf ≥ 0.95 (5 Landmarks)</b>"]
+        
+        D1["Eye Region Crop<br/><code>96 × 96</code> (ImageNet Norm)"]
+        D2["Nose Region Crop<br/><code>64 × 64</code> (ImageNet Norm)"]
+        D3["Full Face Crop<br/><code>224 × 224</code> (ImageNet Norm)"]
+        D4["Temporal Window<br/><code>(N-2) × 6 × 112 × 112</code> (Diffs)"]
+    end
+
+    subgraph Model["Multi-Stream Neural Network (phase3_model.py)"]
+        subgraph S1["Stream 1: Eye"]
+            E1["Fixed Laplacian Filter<br/>+ Mod ResNet-18 + SEBlock<br/><b>Output: 256-d</b>"]
+        end
+        subgraph S2["Stream 2: Nose"]
+            E2["4 Conv Blocks (Dilated)<br/>+ Full CBAM Attention<br/><b>Output: 256-d</b>"]
+        end
+        subgraph S3["Stream 3: Full Face"]
+            E3["ResNet-18 CNN (49 Patches)<br/>+ 4-Layer ViT Encoder (Pre-LN)<br/><b>Output: 512-d</b>"]
+        end
+        subgraph S4["Stream 4: Motion"]
+            E4["3 Conv Blocks<br/>+ SEBlock Attention<br/><b>Output: 256-d</b>"]
+        end
+    end
+
+    subgraph Fusion["Fusion Head & Decision Engine (app.py)"]
+        F["Feature Concatenation<br/><b>1280-d Vector</b>"]
+        G["Fusion Classification Head<br/><code>Linear(1280 → 512) → BN → ReLU</code><br/><code>Dropout(0.4) → Linear(512 → 1)</code>"]
+        H["Sigmoid Activation & Aggregation<br/><b>P(fake) ∈ [0, 1] across N windows</b>"]
+        I["Inference Verdict & Attribution<br/><code>REAL / FAKE</code> + Stream Breakdown"]
+    end
+
+    A --> WebUI
+    WebUI -->|"Video Payload"| B
+    B -->|"RGB Frames"| C
+    C -->|"Midpoint (±48px)"| D1
+    C -->|"Nose Point (±32px)"| D2
+    C -->|"Face Bounding Box"| D3
+    C -->|"Consecutive Triplets"| D4
+
+    D1 --> E1
+    D2 --> E2
+    D3 --> E3
+    D4 --> E4
+
+    E1 -->|"256-d"| F
+    E2 -->|"256-d"| F
+    E3 -->|"512-d"| F
+    E4 -->|"256-d"| F
+
+    F --> G
+    G -->|"Scalar Logit"| H
+    H --> I
+    I -->|"JSON Response"| WebUI
 ```
 
 ---
