@@ -1,7 +1,79 @@
-venv/
+# Byte-compiled / optimized / DLL files
 __pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+.venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# Environment variables & secrets
 .env
-models/
+.env.local
+.env.*.local
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# IDEs & editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Operating System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs & temp files
+logs/
+*.log
+temp/
+tmp/
+
+# Datasets and preprocessed HDF5 data
+datasets/
+data/
+preprocessed/
+*.h5
+*.hdf5
+
+# Deep Learning checkpoints & model weights (track directory, ignore weight binaries)
+models/*.pt
+models/*.pth
+models/*.ckpt
+models/*.bin
+models/*.onnx
 *.pt
 *.pth
-*.h5
+*.ckpt
